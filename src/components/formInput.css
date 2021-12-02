@@ -1,0 +1,29 @@
+.formInput {
+  max-width: 50rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 1rem 5rem;
+}
+
+.formInput__input {
+  padding: 1.5rem;
+  margin: 1rem 0;
+  border-radius: 0.5rem;
+  border: 1px solid gray;
+  outline: none;
+}
+
+.formInput__input:hover {
+  box-shadow: 0 0 5pt 0.5pt #d3d3d3;
+}
+.formInput__input:focus {
+  box-shadow: 0 0 5pt 2pt #d3d3d3;
+  outline-width: 0px;
+}
+
+.formInput__label {
+  letter-spacing: 0.2rem;
+  color: gray;
+  font-size: 1.4rem;
+}

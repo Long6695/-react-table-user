@@ -1,25 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
-
+import React from 'react'
+import 'bootstrap/dist/css/bootstrap.min.css'
+import FormRegister from './components/FormRegister'
+// import FormModal from './components/FormModal'
+import './App.css'
 function App() {
+  // const [data, setData] = useState([])
+
+  // const onSaveData = (user) => {
+  //   setData((prev) => {
+  //     return [user, ...prev]
+  //   })
+  // }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <FormRegister />
+      {/* <FormModal data={data} /> */}
     </div>
-  );
+  )
 }
 
-export default App;
+export default App

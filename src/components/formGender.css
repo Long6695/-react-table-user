@@ -1,0 +1,14 @@
+.formGender__input {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.formGender__input > div input {
+  margin-right: 1rem;
+}
+
+.formGender__input > div label {
+  color: gray;
+  font-size: 1.4rem;
+}
