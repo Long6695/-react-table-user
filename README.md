@@ -1,7 +1,7 @@
 # React Table Users
 
-This project was build by React
-UI use Reactstrap
+This project was build by React.\
+UI use Reactstrap.
 
 ## Available Scripts
 
