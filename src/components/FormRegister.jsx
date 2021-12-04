@@ -65,6 +65,10 @@ const FormRegister = () => {
     setIsData((prev) => prev.filter((user) => user.id !== id))
   }
 
+  const updateDataAfterEdit = (newData) => {
+    setIsData(newData)
+  }
+
   const handleSubmit = (event) => {
     event.preventDefault()
 
@@ -124,7 +128,11 @@ const FormRegister = () => {
         }}
       >
         <FormButton type="submit" name="Register" />
-        <FormModal data={isData} handleDelete={handleDelete} />
+        <FormModal
+          data={isData}
+          handleDelete={handleDelete}
+          newData={updateDataAfterEdit}
+        />
       </div>
     </form>
   )

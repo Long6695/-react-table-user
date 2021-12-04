@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Modal, ModalBody, ModalHeader, Button } from 'reactstrap'
 import Tables from './Tables'
 
-const FormModal = ({ data, handleDelete }) => {
+const FormModal = ({ data, handleDelete, newData }) => {
   const [modal, setModal] = useState(false)
   const toggle = () => setModal(!modal)
   return (
@@ -24,7 +24,7 @@ const FormModal = ({ data, handleDelete }) => {
       <Modal centered size="xl" toggle={toggle} isOpen={modal}>
         <ModalHeader toggle={toggle}>Users</ModalHeader>
         <ModalBody>
-          <Tables data={data} handleDelete={handleDelete} />
+          <Tables data={data} handleDelete={handleDelete} newData={newData} />
         </ModalBody>
       </Modal>
     </div>
