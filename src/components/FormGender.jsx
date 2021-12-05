@@ -3,7 +3,7 @@ import './formGender.css'
 const FormGender = ({ type, onChange }) => {
   const [isClick, setIsClick] = useState(true)
   return (
-    <div className="formInput">
+    <div className="formInput gender">
       <p className="formInput__label">Gender</p>
       <div className="formGender__input">
         <div>

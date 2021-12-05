@@ -1,7 +1,7 @@
 import React from 'react'
 const FormStatus = ({ onChange }) => {
   return (
-    <div className="formInput">
+    <div className="formInput status">
       <label className="formInput__label">Status</label>
       <select className="formInput__input" name="status" onChange={onChange}>
         <option value="Pending">Pending</option>

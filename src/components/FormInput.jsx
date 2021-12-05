@@ -16,7 +16,7 @@ const FormInput = ({
     setFocus(true)
   }
   return (
-    <div className="formInput">
+    <div className={`formInput ${name}`}>
       <label className="formInput__label">{label}</label>
       <input
         className="formInput__input"

@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Table, Button } from 'reactstrap'
-const Tables = ({ data, handleDelete, newData }) => {
+const Tables = ({ users, handleDelete, handleUpdate }) => {
   const [editUser, setEditUser] = useState({})
   const stylesBtn = {
     fontSize: '1.6rem',
@@ -8,21 +8,21 @@ const Tables = ({ data, handleDelete, newData }) => {
     marginBottom: '1rem',
     padding: '0.5rem 1.5rem',
   }
-  const getId = (id) => {
+  const _handleDeleteUser = (id) => {
     handleDelete(id)
   }
 
   const handleEditUser = (user) => {
     const isEmpty = Object.keys(editUser).length === 0
     if (!isEmpty && user.id === editUser.id) {
-      const copyData = [...data]
+      const copyData = [...users]
       const currentIndex = copyData.findIndex((item) => item.id === user.id)
-      copyData[currentIndex].name = user.name
-      copyData[currentIndex].email = user.email
-      copyData[currentIndex].gender = user.gender
-      copyData[currentIndex].bio = user.bio
-      copyData[currentIndex].status = user.status
-      newData(copyData)
+      copyData[currentIndex].name = editUser.name
+      copyData[currentIndex].email = editUser.email
+      copyData[currentIndex].gender = editUser.gender
+      copyData[currentIndex].bio = editUser.bio
+      copyData[currentIndex].status = editUser.status
+      handleUpdate(copyData)
       setEditUser({})
       return
     }
@@ -38,10 +38,31 @@ const Tables = ({ data, handleDelete, newData }) => {
 
   return (
     <div style={{ fontSize: '1.6rem' }}>
-      {data.length === 0 ? (
-        <p>No Users</p>
+      {users.length === 0 ? (
+        <div
+          style={{
+            width: '20rem',
+            height: '5rem',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            backgroundColor: 'gray',
+          }}
+        >
+          <p
+            style={{
+              fontSize: '1.8rem',
+              color: '#fff',
+              textTransform: 'uppercase',
+              fontWeight: '500',
+              margin: '0',
+            }}
+          >
+            No Users
+          </p>
+        </div>
       ) : (
-        <Table borderless dark hover responsive striped>
+        <Table striped bordered hover responsive="sm">
           <thead>
             <tr>
               <th>#</th>
@@ -54,7 +75,7 @@ const Tables = ({ data, handleDelete, newData }) => {
             </tr>
           </thead>
           <tbody>
-            {data.map((user, index) => {
+            {users.map((user, index) => {
               return (
                 <tr key={user.id}>
                   {Object.keys(editUser).length === 0 ? (
@@ -100,7 +121,7 @@ const Tables = ({ data, handleDelete, newData }) => {
                           style={stylesBtn}
                           color="danger"
                           outline
-                          onClick={() => getId(user.id)}
+                          onClick={() => _handleDeleteUser(user.id)}
                         >
                           Delete
                         </Button>
@@ -167,7 +188,7 @@ const Tables = ({ data, handleDelete, newData }) => {
                               style={stylesBtn}
                               color="danger"
                               outline
-                              onClick={() => getId(user.id)}
+                              onClick={() => _handleDeleteUser(user.id)}
                             >
                               Delete
                             </Button>
@@ -216,7 +237,7 @@ const Tables = ({ data, handleDelete, newData }) => {
                               style={stylesBtn}
                               color="danger"
                               outline
-                              onClick={() => getId(user.id)}
+                              onClick={() => _handleDeleteUser(user.id)}
                             >
                               Delete
                             </Button>

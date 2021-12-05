@@ -6,20 +6,24 @@ import FormGender from './FormGender'
 import FormStatus from './FormStatus'
 import FormBio from './FormBio'
 import FormPolicy from './FormPolicy'
-import FormModal from './FormModal'
+import Tables from './Tables'
 import './formRegister.css'
+
+const initialValue = {
+  id: '',
+  name: '',
+  email: '',
+  password: '',
+  password2: '',
+  bio: '',
+  status: 'pending',
+  gender: 'male',
+}
+
 const FormRegister = () => {
-  const [valueInput, setValueInput] = useState({
-    id: '',
-    name: '',
-    email: '',
-    password: '',
-    password2: '',
-    bio: '',
-    status: 'pending',
-    gender: 'male',
-  })
-  const [isData, setIsData] = useState([])
+  const [valueInput, setValueInput] = useState(initialValue)
+  const [users, setUsers] = useState([])
+
   const inputs = [
     {
       id: 1,
@@ -62,30 +66,20 @@ const FormRegister = () => {
   ]
 
   const handleDelete = (id) => {
-    setIsData((prev) => prev.filter((user) => user.id !== id))
+    setUsers((prev) => prev.filter((user) => user.id !== id))
   }
 
   const updateDataAfterEdit = (newData) => {
-    setIsData(newData)
+    setUsers(newData)
   }
 
   const handleSubmit = (event) => {
     event.preventDefault()
 
-    setIsData((prev) => {
+    setUsers((prev) => {
       return [valueInput, ...prev]
     })
-
-    setValueInput({
-      id: '',
-      name: '',
-      email: '',
-      password: '',
-      password2: '',
-      bio: '',
-      status: 'pending',
-      gender: 'male',
-    })
+    setValueInput(initialValue)
   }
 
   const onChange = (event) => {
@@ -100,41 +94,47 @@ const FormRegister = () => {
     })
   }
   return (
-    <form onSubmit={handleSubmit}>
-      <h1 className="heading">Register</h1>
-      {inputs.map((input) => (
-        <FormInput
-          key={input.id}
-          placeholder={input.placeholder}
-          name={input.name}
-          label={input.label}
-          type={input.type}
-          value={valueInput[input.name]}
+    <div className="wrapper">
+      <form onSubmit={handleSubmit}>
+        <h1 className="heading">Register</h1>
+        {inputs.map((input) => (
+          <FormInput
+            key={input.id}
+            placeholder={input.placeholder}
+            name={input.name}
+            label={input.label}
+            type={input.type}
+            value={valueInput[input.name]}
+            onChange={onChange}
+            errorMessage={input.errorMessage}
+            required={input.required}
+            pattern={input.pattern}
+          />
+        ))}
+        <FormGender
+          type="radio"
           onChange={onChange}
-          errorMessage={input.errorMessage}
-          required={input.required}
-          pattern={input.pattern}
+          value={valueInput.gender}
         />
-      ))}
-      <FormGender type="radio" onChange={onChange} value={valueInput.gender} />
-      <FormStatus value={valueInput.status} onChange={onChange} />
-      <FormBio value={valueInput.bio} onChange={onChange} />
-      <FormPolicy />
-      <div
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-        }}
-      >
-        <FormButton type="submit" name="Register" />
-        <FormModal
-          data={isData}
-          handleDelete={handleDelete}
-          newData={updateDataAfterEdit}
-        />
-      </div>
-    </form>
+        <FormStatus value={valueInput.status} onChange={onChange} />
+        <FormBio value={valueInput.bio} onChange={onChange} />
+        <FormPolicy />
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+        >
+          <FormButton type="submit" name="Register" />
+        </div>
+      </form>
+      <Tables
+        users={users}
+        handleDelete={handleDelete}
+        handleUpdate={updateDataAfterEdit}
+      />
+    </div>
   )
 }
 

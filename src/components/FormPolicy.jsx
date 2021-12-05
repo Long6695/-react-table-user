@@ -3,6 +3,7 @@ import React from 'react'
 const FormPolicy = () => {
   return (
     <div
+      className="formInput policy"
       style={{
         display: 'flex',
         alignItems: 'center',

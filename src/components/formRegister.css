@@ -1,12 +1,29 @@
+.wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
 form {
-  max-width: 50rem;
   width: 100%;
   background-color: #fff;
   border-radius: 10px;
   border: 1px solid #777;
   overflow: hidden;
   font-size: 1.6rem;
-  padding-bottom: 2rem;
+  padding-bottom: 4rem;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-areas:
+    'heading heading'
+    'name email'
+    'password password2'
+    'gender status'
+    'bio bio'
+    'policy policy'
+    'register register';
 }
 
 .heading {
@@ -17,6 +34,37 @@ form {
   color: #fff;
   display: flex;
   align-items: center;
+  grid-area: heading;
+}
+.formInput.name {
+  grid-area: name;
+}
+
+.formInput.email {
+  grid-area: email;
+}
+.formInput.password {
+  grid-area: password;
+}
+
+.formInput.password2 {
+  grid-area: password2;
+}
+
+.formInput.gender {
+  grid-area: gender;
+}
+
+.formInput.status {
+  grid-area: status;
+}
+
+.formInput.bio {
+  grid-area: bio;
+}
+
+.formInput.policy {
+  grid-area: policy;
 }
 
 span {
@@ -30,4 +78,21 @@ input:invalid[focused='true']:not([type='checkbox']) {
 }
 input:invalid[focused='true']:not([type='checkbox']) ~ span {
   display: block;
+}
+
+@media screen and (max-width: 50rem) {
+  form {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      'heading'
+      'name'
+      'email'
+      'password'
+      'password2'
+      'gender'
+      'status'
+      'bio'
+      'policy'
+      'register';
+  }
 }

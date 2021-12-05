@@ -2,7 +2,7 @@ import React from 'react'
 
 const FormBio = ({ onChange }) => {
   return (
-    <div className="formInput">
+    <div className="formInput bio">
       <label className="formInput__label">Bio</label>
       <textarea
         style={{ resize: 'none' }}
