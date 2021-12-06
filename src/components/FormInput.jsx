@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import './formInput.css'
 const FormInput = ({
   value,
@@ -8,13 +8,10 @@ const FormInput = ({
   label,
   type,
   errorMessage,
-  required,
   pattern,
+  onBlur,
+  error,
 }) => {
-  const [focus, setFocus] = useState(false)
-  const handleFocus = (e) => {
-    setFocus(true)
-  }
   return (
     <div className={`formInput ${name}`}>
       <label className="formInput__label">{label}</label>
@@ -23,14 +20,12 @@ const FormInput = ({
         type={type}
         value={value}
         onChange={onChange}
-        onBlur={handleFocus}
-        focused={focus.toString()}
+        onBlur={onBlur}
         placeholder={placeholder}
         name={name}
-        required={required}
         pattern={pattern}
       />
-      <span>{errorMessage}</span>
+      <span>{error && errorMessage}</span>
     </div>
   )
 }

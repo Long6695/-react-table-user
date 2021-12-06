@@ -22,6 +22,7 @@ const initialValue = {
 
 const FormRegister = () => {
   const [valueInput, setValueInput] = useState(initialValue)
+  const [error, setError] = useState({})
   const [users, setUsers] = useState([])
 
   const inputs = [
@@ -32,7 +33,6 @@ const FormRegister = () => {
       placeholder: 'Enter your name',
       errorMessage: 'Please enter your name',
       label: 'Name',
-      required: true,
     },
     {
       id: 2,
@@ -41,7 +41,6 @@ const FormRegister = () => {
       placeholder: 'Enter your email',
       errorMessage: 'It should be a valid email address',
       label: 'Email',
-      required: true,
     },
     {
       id: 3,
@@ -51,7 +50,6 @@ const FormRegister = () => {
       errorMessage: 'Password should be more than 6 characters',
       pattern: '^[A-Za-z0-9]{6,16}$',
       label: 'Password',
-      required: true,
     },
     {
       id: 4,
@@ -61,7 +59,6 @@ const FormRegister = () => {
       errorMessage: `Password don't match`,
       label: 'Confirm password',
       pattern: valueInput.password,
-      required: true,
     },
   ]
 
@@ -76,6 +73,25 @@ const FormRegister = () => {
   const handleSubmit = (event) => {
     event.preventDefault()
 
+    const inputs = document.querySelectorAll('input.formInput__input')
+
+    inputs.forEach((input) => {
+      if (input.value === '') {
+        const inputName = input.name
+        setError((prev) => {
+          return {
+            ...prev,
+            [inputName]: true,
+          }
+        })
+      }
+    })
+    const errors = Object.keys(valueInput).filter(
+      (element) => !valueInput[element]
+    )
+
+    if (errors.length > 0) return
+
     setUsers((prev) => {
       return [valueInput, ...prev]
     })
@@ -85,11 +101,28 @@ const FormRegister = () => {
   const onChange = (event) => {
     const { name, value } = event.target
 
+    if (value !== '') {
+      const newError = { ...error }
+      delete newError[name]
+      setError(newError)
+    }
     setValueInput((prev) => {
       return {
         ...prev,
         [name]: value,
         id: uuidv4(),
+      }
+    })
+  }
+
+  function onBlur(event) {
+    const { name, value } = event.target
+    if (value !== '') return
+
+    setError((prevState) => {
+      return {
+        ...prevState,
+        [name]: true,
       }
     })
   }
@@ -106,8 +139,9 @@ const FormRegister = () => {
             type={input.type}
             value={valueInput[input.name]}
             onChange={onChange}
+            onBlur={onBlur}
             errorMessage={input.errorMessage}
-            required={input.required}
+            error={error[input.name]}
             pattern={input.pattern}
           />
         ))}

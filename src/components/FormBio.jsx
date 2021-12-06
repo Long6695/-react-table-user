@@ -1,6 +1,6 @@
 import React from 'react'
 
-const FormBio = ({ onChange }) => {
+const FormBio = ({ onChange, value }) => {
   return (
     <div className="formInput bio">
       <label className="formInput__label">Bio</label>
@@ -10,6 +10,7 @@ const FormBio = ({ onChange }) => {
         name="bio"
         cols="30"
         rows="5"
+        value={value}
         onChange={onChange}
         placeholder="Write something..."
       ></textarea>

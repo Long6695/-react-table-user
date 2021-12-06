@@ -71,12 +71,6 @@ span {
   font-size: 1.4rem;
   color: red;
   padding: 0.4rem 0;
-  display: none;
-}
-input:invalid[focused='true']:not([type='checkbox']) {
-  border: 1px solid red;
-}
-input:invalid[focused='true']:not([type='checkbox']) ~ span {
   display: block;
 }
 
