@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import FormInput from './FormInput'
 import { v4 as uuidv4 } from 'uuid'
 import FormButton from './FormButton'
@@ -21,9 +21,11 @@ const initialValue = {
 }
 
 const FormRegister = () => {
+  let getUsersInLocalStorage = JSON.parse(localStorage.getItem('users')) || []
+
   const [valueInput, setValueInput] = useState(initialValue)
   const [error, setError] = useState({})
-  const [users, setUsers] = useState([])
+  const [users, setUsers] = useState(getUsersInLocalStorage)
 
   const inputs = [
     {
@@ -126,6 +128,11 @@ const FormRegister = () => {
       }
     })
   }
+
+  useEffect(() => {
+    localStorage.setItem('users', JSON.stringify(users))
+  }, [users])
+
   return (
     <div className="wrapper">
       <form onSubmit={handleSubmit}>
