@@ -26,7 +26,7 @@ const FormRegister = () => {
   const [valueInput, setValueInput] = useState(initialValue)
   const [error, setError] = useState({})
   const [users, setUsers] = useState(getUsersInLocalStorage)
-
+  const [isLoading, setIsLoading] = useState(false)
   const inputs = [
     {
       id: 1,
@@ -94,9 +94,18 @@ const FormRegister = () => {
 
     if (errors.length > 0) return
 
-    setUsers((prev) => {
-      return [valueInput, ...prev]
-    })
+    setIsLoading(true)
+
+    setTimeout(() => {
+      setIsLoading(false)
+    }, 1000)
+
+    setTimeout(() => {
+      setUsers((prev) => {
+        return [valueInput, ...prev]
+      })
+    }, 1000)
+
     setValueInput(initialValue)
   }
 
@@ -170,7 +179,9 @@ const FormRegister = () => {
           <FormButton type="submit" name="Register" />
         </div>
       </form>
+
       <Tables
+        isLoading={isLoading}
         users={users}
         handleDelete={handleDelete}
         handleUpdate={updateDataAfterEdit}
